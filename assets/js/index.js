@@ -1,40 +1,35 @@
-// prototype obj
-const funcPrototype = {
-  // prototype method
-  mymethod() {
-    console.log(this);
-  },
-};
-
-// function constructor
-class Func {
-  constructor(param1) {
-    this.field1 = param1;
-  }
-}
-
-// bind obj to prototype
-Func.prototype = Object.assign(Func.prototype, funcPrototype);
-
-const funcInstance = new Func(123);
-// console.log(funcInstance);
-// funcInstance.mymethod()
-
-
-
-
 class MyFunc {
-  // function constructor
+  // instance scope
   constructor(param1) {
     this.field1 = param1;
+    this.prop2 = 5;
   }
+  // instance scope
+  prop = 3;
+  method = function () {}
+  method2 = () => {}
 
-  // prototype method
+
+  // prototype scope
   mymethod() {
     console.log(this);
   }
+
+
+  // static scope
+  static myStaticField = Math.random() * 10;
 }
 
-const classInstance = new MyFunc(123);
+// instance scope
+const classInstance = new MyFunc('123');
 console.log(classInstance);
 classInstance.mymethod();
+
+// prototype scope
+const myProt = classInstance.__proto__
+const parentProt = MyFunc.prototype
+
+// static scope
+console.log(classInstance.myStaticField);
+console.log(classInstance.__proto__.constructor.myStaticField);
+console.log(MyFunc.myStaticField);
